@@ -1,3 +1,7 @@
+#[cfg(test)]
+use mockall::*;
+
+#[cfg_attr(test, automock)]
 pub trait FizzBuzzer {
     fn fizzbuzz(&self, input: FizzBuzzCommand) -> Result<Vec<String>, String>;
 }
