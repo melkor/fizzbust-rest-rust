@@ -41,53 +41,120 @@ impl crate::ports::FizzBuzzer for Simple {
     mod test {
         use super::*;
 
+        struct TestCase {
+            //name: String,
+            int1: i32,
+            int2: i32,
+            limit: i32,
+            str1: String,
+            str2: String,
+            expected_result: Vec<String>,    
+            expected_error: String,
+        }
+        
         #[test]
         fn success() {
-            let expected = vec!["1", "fizz", "3", "fizzbuzz", "5", "fizz", "7", "fizzbuzz", "9", "fizz"];
+            let tc = TestCase{
+                int1: 2,
+                int2: 4,
+                limit: 10,
+                str1: String::from("fizz"),
+                str2: String::from("buzz"),
+                expected_result: vec![
+                    String::from("1"), 
+                    String::from("fizz"), 
+                    String::from("3"), 
+                    String::from("fizzbuzz"), 
+                    String::from("5"), 
+                    String::from("fizz"), 
+                    String::from("7"), 
+                    String::from("fizzbuzz"), 
+                    String::from("9"), 
+                    String::from("fizz"), 
+                ],
+                expected_error: String::new(),
+            };
+
             let acutal_fizzbuzzer = Simple{};
-            match acutal_fizzbuzzer.fizzbuzz(2, 4, 10, String::from("fizz"), String::from("buzz")) {
-                Ok(actual) => assert_eq!(actual, expected),
-                Err(err) => assert_eq!(err, "")
+            match acutal_fizzbuzzer.fizzbuzz(tc.int1, tc.int2, tc.limit, tc.str1, tc.str2) {
+                Ok(actual) => assert_eq!(actual, tc.expected_result),
+                Err(err) => assert_eq!(err, tc.expected_error)
             }
         }
 
         #[test]
         fn error_int1() {
-            let expected: Vec<String> = Vec::new();
+            let tc = TestCase{
+                int1: 0,
+                int2: 4,
+                limit: 10,
+                str1: String::from("fizz"),
+                str2: String::from("buzz"),
+                expected_result: Vec::new(), 
+                expected_error: String::from("int1 is invalid"),
+            };
+
             let acutal_fizzbuzzer = Simple{};
-            match acutal_fizzbuzzer.fizzbuzz(0, 4, 10, String::from("fizz"), String::from("buzz")) {
-                Ok(actual) => assert_eq!(actual, expected),
-                Err(err) => assert_eq!(err, "int1 is invalid")
+            match acutal_fizzbuzzer.fizzbuzz(tc.int1, tc.int2, tc.limit, tc.str1, tc.str2) {
+                Ok(actual) => assert_eq!(actual, tc.expected_result),
+                Err(err) => assert_eq!(err, tc.expected_error)
             }
         }
 
         #[test]
         fn error_int2() {
-            let expected: Vec<String> = Vec::new();
+            let tc = TestCase{
+                int1: 2,
+                int2: 0,
+                limit: 10,
+                str1: String::from("fizz"),
+                str2: String::from("buzz"),
+                expected_result: Vec::new(), 
+                expected_error: String::from("int2 is invalid"),
+            };
+
             let acutal_fizzbuzzer = Simple{};
-            match acutal_fizzbuzzer.fizzbuzz(2, 0, 10, String::from("fizz"), String::from("buzz")) {
-                Ok(actual) => assert_eq!(actual, expected),
-                Err(err) => assert_eq!(err, "int2 is invalid")
+            match acutal_fizzbuzzer.fizzbuzz(tc.int1, tc.int2, tc.limit, tc.str1, tc.str2) {
+                Ok(actual) => assert_eq!(actual, tc.expected_result),
+                Err(err) => assert_eq!(err, tc.expected_error)
             }
         }
 
         #[test]
         fn error_limit_to_small() {
-            let expected: Vec<String> = Vec::new();
+            let tc = TestCase{
+                int1: 2,
+                int2: 4,
+                limit: 0,
+                str1: String::from("fizz"),
+                str2: String::from("buzz"),
+                expected_result: Vec::new(), 
+                expected_error: String::from("limit is invalid"),
+            };
+
             let acutal_fizzbuzzer = Simple{};
-            match acutal_fizzbuzzer.fizzbuzz(2, 4, 0, String::from("fizz"), String::from("buzz")) {
-                Ok(actual) => assert_eq!(actual, expected),
-                Err(err) => assert_eq!(err, "limit is invalid")
+            match acutal_fizzbuzzer.fizzbuzz(tc.int1, tc.int2, tc.limit, tc.str1, tc.str2) {
+                Ok(actual) => assert_eq!(actual, tc.expected_result),
+                Err(err) => assert_eq!(err, tc.expected_error)
             }
         }
 
         #[test]
         fn error_limit_to_big() {
-            let expected: Vec<String> = Vec::new();
+            let tc = TestCase{
+                int1: 2,
+                int2: 4,
+                limit: 200_000,
+                str1: String::from("fizz"),
+                str2: String::from("buzz"),
+                expected_result: Vec::new(), 
+                expected_error: String::from("limit is invalid"),
+            };
+
             let acutal_fizzbuzzer = Simple{};
-            match acutal_fizzbuzzer.fizzbuzz(2, 4, 200_000, String::from("fizz"), String::from("buzz")) {
-                Ok(actual) => assert_eq!(actual, expected),
-                Err(err) => assert_eq!(err, "limit is invalid")
+            match acutal_fizzbuzzer.fizzbuzz(tc.int1, tc.int2, tc.limit, tc.str1, tc.str2) {
+                Ok(actual) => assert_eq!(actual, tc.expected_result),
+                Err(err) => assert_eq!(err, tc.expected_error)
             }
         }
     }
