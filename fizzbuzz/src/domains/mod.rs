@@ -1,7 +1,7 @@
 use crate::ports::{FizzBuzzer, FizzBuzzCommand};
 
-pub fn get_fizzbuzz(fizzbuzz: &impl FizzBuzzer) -> Result<Vec<String>, String>{
-    fizzbuzz.fizzbuzz(
+pub fn get_fizzbuzz(fizzbuzzadapter: &impl FizzBuzzer) -> Result<Vec<String>, String>{
+    fizzbuzzadapter.fizzbuzz(
         FizzBuzzCommand{
             int1: 3,
             int2: 5,
@@ -20,20 +20,21 @@ mod tests {
     #[test]
     fn mytest() {
         let mut mock = crate::ports::MockFizzBuzzer::new();
-        let expected: Result<Vec<String>, String> = Ok(vec!["".to_string()]);
+        let fizzbuzz_return: Result<Vec<String>, String> = Ok(vec!["".to_string()]);
         mock.expect_fizzbuzz()
             .times(1)
-            .return_const(expected);
-        match mock.fizzbuzz(FizzBuzzCommand{
+            .return_const(fizzbuzz_return);
+
+        let actual = mock.fizzbuzz(FizzBuzzCommand{
                 int1: 3,
                 int2: 5,
                 limit: 10,
                 str1: "str1".to_string(), 
                 str2: "str2".to_string(), 
             },
-        ) {
-            Ok(actual) => assert_eq!(actual, vec![""]),
-            Err(err) => assert_eq!(err, "".to_string()),
-        }
+        );
+
+        let expected: Result<Vec<String>, String> = Ok(vec!["".to_string()]);
+        assert_eq!(actual, expected);
     }
 }

@@ -42,8 +42,7 @@ mod test {
 
     struct TestCase {
         given_input: FizzBuzzCommand,
-        expected_result: Vec<String>,
-        expected_error: String,
+        expected: Result<Vec<String>,String>,
     }
 
     #[test]
@@ -56,7 +55,7 @@ mod test {
                 str1: String::from("fizz"),
                 str2: String::from("buzz"),
             },
-            expected_result: vec![
+            expected: Ok(vec![
                 String::from("1"),
                 String::from("fizz"),
                 String::from("3"),
@@ -67,15 +66,12 @@ mod test {
                 String::from("fizzbuzz"),
                 String::from("9"),
                 String::from("fizz"),
-            ],
-            expected_error: String::new(),
+            ]),
         };
 
-        let acutal_fizzbuzzer = Simple {};
-        match acutal_fizzbuzzer.fizzbuzz(tc.given_input) {
-            Ok(actual) => assert_eq!(actual, tc.expected_result),
-            Err(err) => assert_eq!(err, tc.expected_error),
-        }
+        let fizzbuzzer = Simple {};
+        let actual = fizzbuzzer.fizzbuzz(tc.given_input);
+        assert_eq!(actual, tc.expected);
     }
 
     #[test]
@@ -88,15 +84,12 @@ mod test {
                 str1: String::from("fizz"),
                 str2: String::from("buzz"),
             },
-            expected_result: Vec::new(),
-            expected_error: String::from("int1 is invalid"),
+            expected: Err(String::from("int1 is invalid")),
         };
 
-        let acutal_fizzbuzzer = Simple {};
-        match acutal_fizzbuzzer.fizzbuzz(tc.given_input) {
-            Ok(actual) => assert_eq!(actual, tc.expected_result),
-            Err(err) => assert_eq!(err, tc.expected_error),
-        }
+        let fizzbuzzer = Simple {};
+        let actual = fizzbuzzer.fizzbuzz(tc.given_input);
+        assert_eq!(actual, tc.expected);
     }
 
     #[test]
@@ -109,15 +102,12 @@ mod test {
                 str1: String::from("fizz"),
                 str2: String::from("buzz"),
             },
-            expected_result: Vec::new(),
-            expected_error: String::from("int2 is invalid"),
+            expected: Err(String::from("int2 is invalid")),
         };
 
-        let acutal_fizzbuzzer = Simple {};
-        match acutal_fizzbuzzer.fizzbuzz(tc.given_input) {
-            Ok(actual) => assert_eq!(actual, tc.expected_result),
-            Err(err) => assert_eq!(err, tc.expected_error),
-        }
+        let fizzbuzzer = Simple {};
+        let actual = fizzbuzzer.fizzbuzz(tc.given_input);
+        assert_eq!(actual, tc.expected);
     }
 
     #[test]
@@ -130,15 +120,12 @@ mod test {
                 str1: String::from("fizz"),
                 str2: String::from("buzz"),
             },
-            expected_result: Vec::new(),
-            expected_error: String::from("limit is invalid"),
+            expected: Err(String::from("limit is invalid")),
         };
 
-        let acutal_fizzbuzzer = Simple {};
-        match acutal_fizzbuzzer.fizzbuzz(tc.given_input) {
-            Ok(actual) => assert_eq!(actual, tc.expected_result),
-            Err(err) => assert_eq!(err, tc.expected_error),
-        }
+        let fizzbuzzer = Simple {};
+        let actual = fizzbuzzer.fizzbuzz(tc.given_input);
+        assert_eq!(actual, tc.expected);
     }
 
     #[test]
@@ -151,14 +138,11 @@ mod test {
                 str1: String::from("fizz"),
                 str2: String::from("buzz"),
             },
-            expected_result: Vec::new(),
-            expected_error: String::from("limit is invalid"),
+            expected: Err(String::from("limit is invalid")),
         };
 
-        let acutal_fizzbuzzer = Simple {};
-        match acutal_fizzbuzzer.fizzbuzz(tc.given_input) {
-            Ok(actual) => assert_eq!(actual, tc.expected_result),
-            Err(err) => assert_eq!(err, tc.expected_error),
-        }
+        let fizzbuzzer = Simple {};
+        let actual = fizzbuzzer.fizzbuzz(tc.given_input);
+        assert_eq!(actual, tc.expected);
     }
 }
