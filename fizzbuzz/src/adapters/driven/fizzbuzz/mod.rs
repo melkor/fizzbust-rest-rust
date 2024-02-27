@@ -42,7 +42,7 @@ mod test {
 
     struct TestCase {
         given_input: FizzBuzzCommand,
-        expected: Result<Vec<String>,String>,
+        expected: Result<Vec<String>, String>,
     }
 
     #[test]
