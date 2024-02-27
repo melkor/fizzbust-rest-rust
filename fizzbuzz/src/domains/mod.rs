@@ -25,14 +25,7 @@ mod tests {
             .times(1)
             .return_const(fizzbuzz_return);
 
-        let actual = mock.fizzbuzz(FizzBuzzCommand{
-                int1: 3,
-                int2: 5,
-                limit: 10,
-                str1: "str1".to_string(), 
-                str2: "str2".to_string(), 
-            },
-        );
+        let actual = get_fizzbuzz(&mock);
 
         let expected: Result<Vec<String>, String> = Ok(vec!["".to_string()]);
         assert_eq!(actual, expected);
