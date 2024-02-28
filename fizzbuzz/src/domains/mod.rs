@@ -7,8 +7,8 @@ pub fn get_fizzbuzz(fizzbuzzadapter: &impl FizzBuzzer) -> Result<Vec<String>, St
             int1: 3,
             int2: 5,
             limit: 10,
-            str1: "str1".to_string(), 
-            str2: "str2".to_string(), 
+            str1: "str1".to_string(),
+            str2: "str2".to_string(),
         },
     )
 }
