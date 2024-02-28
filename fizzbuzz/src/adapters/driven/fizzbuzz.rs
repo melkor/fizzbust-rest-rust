@@ -1,6 +1,6 @@
 use crate::ports::{FizzBuzzCommand, FizzBuzzer};
 
-struct Simple {}
+pub struct Simple {}
 
 impl FizzBuzzer for Simple {
     fn fizzbuzz(&self, input: FizzBuzzCommand) -> Result<Vec<String>, String> {

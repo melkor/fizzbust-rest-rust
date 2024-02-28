@@ -1,1 +1,1 @@
-mod fizzbuzz;
+pub mod fizzbuzz;
