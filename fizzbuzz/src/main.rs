@@ -30,9 +30,8 @@ struct FizzBuzzReponse {
 }
 
 #[derive(Debug, Display, Error)]
-#[display(fmt = "my error: {}", name)]
 struct MyError {
-    name: &'static str,
+    name: String,
 }
 
 // Use default implementation for `error_response()` method
@@ -50,7 +49,7 @@ async fn get_fizzbuzz(query: web::Query<FizzBuzzQuery>) -> Result<impl Responder
     };
     match fizzbuzzer.fizzbuzz(command) {
         Ok(response) => Ok(web::Json(response)),
-        Err(_) => Err(MyError { name: "error fix me"}),
+        Err(err) => Err(MyError { name: err }),
     }
 }
 

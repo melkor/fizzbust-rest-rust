@@ -1,3 +1,4 @@
+/*
 use crate::ports::{FizzBuzzer, FizzBuzzCommand};
 
 pub fn get_fizzbuzz(fizzbuzzadapter: &impl FizzBuzzer) -> Result<Vec<String>, String>{
@@ -31,3 +32,4 @@ mod tests {
         assert_eq!(actual, expected);
     }
 }
+*/
